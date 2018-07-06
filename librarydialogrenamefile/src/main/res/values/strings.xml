@@ -1,0 +1,6 @@
+<resources>
+    <string name="dialog_rename_file_title">重命名文件</string>
+    <string name="dialog_rename_file_cancel">取消</string>
+    <string name="dialog_rename_file_hint">文件名称</string>
+    <string name="dialog_rename_file_confirm">确定</string>
+</resources>

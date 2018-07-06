@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.a5idoo.library.dialog.rename.file">
+    <application android:theme="@style/AppTheme">
+        <activity
+            android:name=".DialogRenameFile"
+            android:theme="@style/DialogRenameFileTheme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            />
+    </application>
+</manifest>
