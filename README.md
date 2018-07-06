@@ -1,5 +1,5 @@
 # AppUpdate
-应用更新下载库[![](https://jitpack.io/v/codyyeachann/AppUpdate.svg)](https://jitpack.io/#codyyeachann/AppUpdate)
+应用更新下载库[![](https://jitpack.io/v/codyyeachann/DialogRenameFile.svg)](https://jitpack.io/#codyyeachann/DialogRenameFile)
 ## How to
 #### Step 1. Add the JitPack repository to your build file
 ```
@@ -14,17 +14,45 @@ allprojects {
 #### Step 2. Add the dependency
 ```
 dependencies {
-	        implementation 'com.github.codyyeachann:AppUpdate:v1.0.2'
+	        implementation 'com.github.codyyeachann:DialogRenameFile:v1.0.0'
 	}
 ```
 #### Step 3. Use it in your project
 ```
-        Intent intent = new Intent(this, UpdateDialogActivity.class);
-        intent.putExtra(UpdateDialogActivity.ARG_CONTENT, "update dialog content");//Mandatory
-        intent.putExtra(UpdateDialogActivity.ARG_TITLE, "update dialog title");//Mandatory
-        intent.putExtra(UpdateDialogActivity.ARG_URL, "app file download url");//Mandatory
-        intent.putExtra(UpdateDialogActivity.ARG_AUTHORITY, BuildConfig.APPLICATION_ID + ".file.provider");//when sdk >=7.0,you must add fileprovider in AndroidManifest.xml
-        intent.putExtra(UpdateDialogActivity.ARG_APPLICATION_ID, BuildConfig.APPLICATION_ID);//when sdk >=8.0,you must add this argument
-        intent.putExtra(UpdateDialogActivity.ARG_FILE_NAME, mFileName);//Optional argument
+        RenameFileEventManager.setEventListener(new SimpleRenameFileEvent() {
+                    @Override
+                    public void onEmpty() {
+                        Toast.makeText(getApplicationContext(), "请输入文件名", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onMax(int maxLength) {
+                        Toast.makeText(getApplicationContext(), "最大长度为" + maxLength + "个字", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onRename(String str) {
+                        Toast.makeText(getApplicationContext(), "重命名为:" + str, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onRename(String str, String id) {
+                        Toast.makeText(getApplicationContext(), "重命名为:" + str + ";ID:" + id, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+```
+```
+        Intent intent = new Intent(this, DialogRenameFile.class);
+        intent.putExtra(DialogRenameFile.EXTRA_FILENAME, "123.txt");
+        intent.putExtra(DialogRenameFile.EXTRA_ID, "adbcdef");
+        intent.putExtra(DialogRenameFile.EXTRA_MAX_LENGTH, 5);//default max length is 50
         startActivity(intent);
+```
+```
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RenameFileEventManager.unbind();
+    }
 ```
