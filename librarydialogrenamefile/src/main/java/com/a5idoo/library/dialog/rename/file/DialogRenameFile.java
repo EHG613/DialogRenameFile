@@ -1,5 +1,6 @@
 package com.a5idoo.library.dialog.rename.file;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 public class DialogRenameFile extends AppCompatActivity {
     private NoMenuEditText mEtContent;
@@ -20,14 +22,14 @@ public class DialogRenameFile extends AppCompatActivity {
         setContentView(R.layout.activity_dialog_rename_file);
         mEtContent = findViewById(R.id.et_dialog_content);
         mEtContent.addTextChangedListener(new EditChangedListener());
-        if(TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_FILENAME))){
+        if (TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_FILENAME))) {
             mEtContent.setText(null);
-        }else if(getIntent().getStringExtra(EXTRA_FILENAME).lastIndexOf(".")<0) {
+        } else if (getIntent().getStringExtra(EXTRA_FILENAME).lastIndexOf(".") < 0) {
             mEtContent.setText(getIntent().getStringExtra(EXTRA_FILENAME));
-            mEtContent.setSelection(TextUtils.isEmpty(mEtContent.getText())?0:mEtContent.getText().length());
-        }else{
-            mEtContent.setText(getIntent().getStringExtra(EXTRA_FILENAME).substring(0,getIntent().getStringExtra(EXTRA_FILENAME).lastIndexOf(".")));
-            mEtContent.setSelection(TextUtils.isEmpty(mEtContent.getText())?0:mEtContent.getText().length());
+            mEtContent.setSelection(TextUtils.isEmpty(mEtContent.getText()) ? 0 : mEtContent.getText().length());
+        } else {
+            mEtContent.setText(getIntent().getStringExtra(EXTRA_FILENAME).substring(0, getIntent().getStringExtra(EXTRA_FILENAME).lastIndexOf(".")));
+            mEtContent.setSelection(TextUtils.isEmpty(mEtContent.getText()) ? 0 : mEtContent.getText().length());
         }
     }
 
@@ -46,15 +48,16 @@ public class DialogRenameFile extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            if (temp.length() > getIntent().getIntExtra(EXTRA_MAX_LENGTH,50)) {
-                RenameFileEventManager.onMax(getIntent().getIntExtra(EXTRA_MAX_LENGTH,50));
-                mEtContent.setText(editable.subSequence(0, getIntent().getIntExtra(EXTRA_MAX_LENGTH,50)));
-                mEtContent.setSelection(TextUtils.isEmpty(mEtContent.getText())?0:mEtContent.getText().length());
+            if (temp.length() > getIntent().getIntExtra(EXTRA_MAX_LENGTH, 50)) {
+                RenameFileEventManager.onMax(getIntent().getIntExtra(EXTRA_MAX_LENGTH, 50));
+                mEtContent.setText(editable.subSequence(0, getIntent().getIntExtra(EXTRA_MAX_LENGTH, 50)));
+                mEtContent.setSelection(TextUtils.isEmpty(mEtContent.getText()) ? 0 : mEtContent.getText().length());
             }
         }
     }
 
     public void onCancel(View view) {
+        closeKeyboard();
         finish();
     }
 
@@ -67,7 +70,16 @@ public class DialogRenameFile extends AppCompatActivity {
             } else {
                 RenameFileEventManager.onRename(mEtContent.getText().toString() + (getIntent().getStringExtra(EXTRA_FILENAME).lastIndexOf(".") < 0 ? "" : getIntent().getStringExtra(EXTRA_FILENAME).substring(getIntent().getStringExtra(EXTRA_FILENAME).lastIndexOf("."))), getIntent().getStringExtra(EXTRA_ID));
             }
+            closeKeyboard();
             finish();
+        }
+    }
+
+    private void closeKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(mEtContent.getWindowToken(), 0);
+            imm.hideSoftInputFromInputMethod(mEtContent.getApplicationWindowToken(), 0);
         }
     }
 }

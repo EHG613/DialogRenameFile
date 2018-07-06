@@ -11,7 +11,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -59,7 +59,7 @@ javadoc {
         author true
         version true
         links "http://docs.oracle.com/javase/7/docs/api"
-        title "重命名文件Dialog 1.0.0"
+        title "重命名文件Dialog 1.0.1"
     }
 }
 // 制作文档(Javadoc)
