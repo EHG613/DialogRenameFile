@@ -1,5 +1,5 @@
-# AppUpdate
-应用更新下载库[![](https://jitpack.io/v/codyyeachann/DialogRenameFile.svg)](https://jitpack.io/#codyyeachann/DialogRenameFile)
+# DialogRenameFile
+文件重命名库[![](https://jitpack.io/v/codyyeachann/DialogRenameFile.svg)](https://jitpack.io/#codyyeachann/DialogRenameFile)
 ## How to
 #### Step 1. Add the JitPack repository to your build file
 ```
