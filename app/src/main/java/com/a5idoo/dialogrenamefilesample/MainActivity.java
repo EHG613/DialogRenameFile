@@ -1,13 +1,12 @@
 package com.a5idoo.dialogrenamefilesample;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.a5idoo.library.dialog.rename.file.DialogRenameFile;
-import com.a5idoo.library.dialog.rename.file.RenameFileEvent;
 import com.a5idoo.library.dialog.rename.file.RenameFileEventManager;
 import com.a5idoo.library.dialog.rename.file.SimpleRenameFileEvent;
 

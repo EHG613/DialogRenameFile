@@ -15,7 +15,7 @@ import android.view.MenuItem;
  * NoMenuEditText 取消EditText粘贴功能
  * Created by lijian on 2016/7/27.
  */
-public class NoMenuEditText extends android.support.v7.widget.AppCompatEditText {
+public class NoMenuEditText extends androidx.appcompat.widget.AppCompatEditText {
     private final Context context;
 
 
