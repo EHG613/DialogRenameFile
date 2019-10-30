@@ -1,5 +1,5 @@
 # DialogRenameFile
-文件重命名库[![](https://jitpack.io/v/codyyeachann/DialogRenameFile.svg)](https://jitpack.io/#codyyeachann/DialogRenameFile)
+文件重命名库[![](https://jitpack.io/v/EHG613/DialogRenameFile.svg)](https://jitpack.io/#EHG613/DialogRenameFile)
 ## How to
 #### Step 1. Add the JitPack repository to your build file
 ```
@@ -14,7 +14,7 @@ allprojects {
 #### Step 2. Add the dependency
 ```
 dependencies {
-	        implementation 'com.github.codyyeachann:DialogRenameFile:v1.0.1'
+	        implementation 'com.github.EHG613:DialogRenameFile:1.1.0'
 	}
 ```
 #### Step 3. Use it in your project
